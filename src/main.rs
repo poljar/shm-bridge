@@ -32,6 +32,7 @@ use windows::Win32::Storage::FileSystem::FILE_ATTRIBUTE_TEMPORARY;
 use crate::file_mapping::FileMapping;
 
 mod file_mapping;
+mod mounts_parser;
 
 const LONG_ABOUT: &str = "Shared Memory Bridge facilitates sharing memory between Windows\n\
                           applications running under Wine/Proton and Linux, offering a seamless\n\
