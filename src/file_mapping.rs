@@ -18,14 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-use std::{fs::File, os::windows::prelude::AsRawHandle};
+use std::{fs::File, os::windows::prelude::AsRawHandle, path::Path};
 
 use anyhow::{anyhow, Context, Result};
 use windows::{
     core::HSTRING,
     Wdk::System::SystemServices::PAGE_READWRITE,
     Win32::{
-        Foundation::{CloseHandle, HANDLE},
+        Foundation::{CloseHandle, HANDLE, MAX_PATH},
+        Storage::FileSystem::GetVolumeInformationW,
         System::Memory::{CreateFileMappingW, PAGE_PROTECTION_FLAGS},
     },
 };
@@ -93,5 +94,41 @@ impl Drop for FileMapping {
     fn drop(&mut self) {
         // There's not much we can do if an error happens here, so let's ignore it.
         let _ = unsafe { CloseHandle(self.handle) };
+    }
+}
+
+fn get_file_system_name(path: &Path) -> Result<String> {
+    let path_string = HSTRING::from(path.as_os_str());
+
+    let mut name = vec![0u16; MAX_PATH as usize + 1];
+
+    match unsafe { GetVolumeInformationW(&path_string, None, None, None, None, Some(&mut name)) } {
+        Ok(_) => {
+            let name = HSTRING::from_wide(&name)?;
+
+            Ok(name.to_string())
+        }
+        Err(e) => Err(anyhow!(
+            "Could not find the file system name for {}: {e:?}",
+            path.to_string_lossy()
+        )),
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use std::path::PathBuf;
+
+    use super::*;
+
+    #[test]
+    fn file_system_name() {
+        let path = PathBuf::from("Z:\\");
+        let name = get_file_system_name(&path)
+            .expect("We should be able to find the /dev/shm file system name");
+
+        println!("{name}");
+
+        todo!()
     }
 }
