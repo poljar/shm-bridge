@@ -1,3 +1,5 @@
+![Build badge](https://github.com/poljar/shm-bridge/actions/workflows/ci.yml/badge.svg)
+
 # Shared memory bridge
 
 Share memory between a Windows application running under Wine/Proton and Linux.
