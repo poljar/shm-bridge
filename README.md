@@ -1,7 +1,10 @@
-[![CI](https://github.com/poljar/shm-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/poljar/shm-bridge/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Shared Memory Bridge &emsp; [![Build Status]][actions] [![License: MIT]][license]
 
-# Shared memory bridge
+[License: MIT]: https://img.shields.io/badge/License-MIT-yellow.svg
+[license]: https://opensource.org/licenses/MIT
+[Build Status]: https://img.shields.io/github/actions/workflow/status/poljar/shm-bridge/ci.yml?branch=main
+[actions]: https://github.com/poljar/shm-bridge/actions/workflows/ci.yml
+
 
 Share memory between a Windows application running under Wine/Proton and Linux.
 
@@ -108,7 +111,7 @@ All mappings were successfully created, press CTRL-C to exit.
 
 ## Supported titles
 
-The shared memory bridge currently supports the following titles:
+The Shared Memory Bridge currently supports the following titles:
 
 * [Assetto Corsa][ac]
 * [Assetto Corsa Competizione][acc]
