@@ -1,4 +1,4 @@
-![Build badge](https://github.com/poljar/shm-bridge/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/poljar/shm-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/poljar/shm-bridge/actions/workflows/ci.yml)
 
 # Shared memory bridge
 
